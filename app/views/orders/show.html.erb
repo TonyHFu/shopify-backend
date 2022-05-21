@@ -1,12 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
+<%= link_to "Products", products_path %>
+<%= link_to "Cart", cart_path %>
+<%= link_to "Back to orders", orders_path %>
 <%= render @order %>
 
 <div>
   <section>
 
     <header>
-      <h1>My Cart</h1>
+      <h1>Order <%= @order.id%></h1>
+      <p>Your order is on the way!</p>
     </header>
 
     <div>
@@ -20,7 +24,7 @@
           </tr>
         </thead>
         <tbody>
-          <% subtotal = 0 %>
+          <% subtotal = 0.0 %>
           <% @order.order_items.each do |item| %>
             <%= render 'item', item: item %>
             <% subtotal += item.total_price_cents%>
@@ -32,7 +36,7 @@
               TOTAL:
             </th>
             <th>
-              <%= cart_subtotal_cents / 100.0 %>
+              <%= humanized_money_with_symbol @order.total_cents / 100.0%>
             </th>
           </tr>
         </tfoot>
@@ -42,7 +46,5 @@
   </section>
 
 
-  <%= link_to "Back to orders", orders_path %>
 
-  <%= button_to "Destroy this order", @order, method: :delete %>
 </div>

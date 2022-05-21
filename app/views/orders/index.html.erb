@@ -1,5 +1,6 @@
 <p style="color: green"><%= notice %></p>
-
+<%= link_to "Products", products_path %>
+<%= link_to "Cart", cart_path %>
 <h1>Orders</h1>
 
 <div id="orders">
@@ -17,5 +18,3 @@
   <% end %>
 </div>
 
-<%= link_to "New order", new_order_path %>
-<%= link_to "Back to products", products_path %>

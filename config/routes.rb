@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
 	resources :products
 
-	resources :orders
+	resources :orders, only: %i[index show create]
 
 	resource :cart, only: [:show] do
 		post :add_item

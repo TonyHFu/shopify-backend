@@ -30,6 +30,7 @@ class OrdersController < ApplicationController
 
 		respond_to do |format|
 			if @order.save
+				empty_cart!
 				format.html do
 					redirect_to order_url(@order),
 					            notice: 'Order was successfully created.'
@@ -75,6 +76,11 @@ class OrdersController < ApplicationController
 	end
 
 	private
+
+	# To empty cart once order accepted
+	def empty_cart!
+		update_cart({})
+	end
 
 	# Use callbacks to share common setup or constraints between actions.
 	def set_order
