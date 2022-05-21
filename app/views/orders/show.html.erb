@@ -3,7 +3,45 @@
 <%= render @order %>
 
 <div>
-  <%= link_to "Edit this order", edit_order_path(@order) %> |
+  <section>
+
+    <header>
+      <h1>My Cart</h1>
+    </header>
+
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% subtotal = 0 %>
+          <% @order.order_items.each do |item| %>
+            <%= render 'item', item: item %>
+            <% subtotal += item.total_price_cents%>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="4">
+              TOTAL:
+            </th>
+            <th>
+              <%= cart_subtotal_cents / 100.0 %>
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </section>
+
+
   <%= link_to "Back to orders", orders_path %>
 
   <%= button_to "Destroy this order", @order, method: :delete %>

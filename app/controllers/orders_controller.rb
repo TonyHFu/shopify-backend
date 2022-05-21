@@ -16,7 +16,17 @@ class OrdersController < ApplicationController
 
 	# POST /orders or /orders.json
 	def create
-		@order = Order.new(order_params)
+		@order = Order.new(total_cents: cart_subtotal_cents)
+		cart_details.each do |item|
+			product = item[:product]
+			quantity = item[:quantity]
+			@order.order_items.new(
+				product: product,
+				quantity: quantity,
+				item_price_cents: product.price,
+				total_price_cents: product.price * quantity,
+			)
+		end
 
 		respond_to do |format|
 			if @order.save
@@ -69,10 +79,5 @@ class OrdersController < ApplicationController
 	# Use callbacks to share common setup or constraints between actions.
 	def set_order
 		@order = Order.find(params[:id])
-	end
-
-	# Only allow a list of trusted parameters through.
-	def order_params
-		params.permit(:id)
 	end
 end

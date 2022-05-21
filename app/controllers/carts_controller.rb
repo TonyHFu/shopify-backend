@@ -1,8 +1,5 @@
 class CartsController < ApplicationController
-	def show
-		puts cart.count
-		render '/carts/error' if cart.count == 0
-	end
+	def show; end
 
 	def add_item
 		product_id = params[:product_id].to_s

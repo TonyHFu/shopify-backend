@@ -6,9 +6,16 @@
   <% @orders.each do |order| %>
     <%= render order %>
     <p>
-      <%= link_to "Show this order", order %>
+      id: <%= order.id %>
+    </p>
+    <p>
+      total: <%= humanized_money_with_symbol order.total_cents / 100.0 %>
+    </p>
+    <p>
+      <%= link_to "More details", order %>
     </p>
   <% end %>
 </div>
 
 <%= link_to "New order", new_order_path %>
+<%= link_to "Back to products", products_path %>
