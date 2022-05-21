@@ -5,6 +5,11 @@ Rails.application.routes.draw do
 
 	resources :orders
 
+	resource :cart, only: [:show] do
+		post :add_item
+		post :remove_item
+	end
+
 	# Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
 	# Defines the root path route ("/")

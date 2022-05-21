@@ -1,6 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
+<%= link_to "See Cart", cart_path %>
 <h1>Products</h1>
+
 
 <div id="products">
   <% @products.each do |product| %>
@@ -14,9 +16,13 @@
     <p>
       Quantity: <%= product.quantity%>
     </p>
+
+    <%= button_to "Add to cart", add_item_cart_path(product_id: product.id), method: :post %>
+
     <p>
       <%= link_to "More Info", product %>
     </p>
+
   <% end %>
 </div>
 
