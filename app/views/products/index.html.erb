@@ -6,7 +6,16 @@
   <% @products.each do |product| %>
     <%= render product %>
     <p>
-      <%= link_to "Show this product", product %>
+      <%= product.name %>
+    </p>
+    <p>
+      Price: <%= humanized_money_with_symbol product.price_cents / 100.0 %>
+    </p>
+    <p>
+      Quantity: <%= product.quantity%>
+    </p>
+    <p>
+      <%= link_to "More Info", product %>
     </p>
   <% end %>
 </div>

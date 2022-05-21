@@ -7,3 +7,35 @@
 <div>
   <%= link_to "Back to products", products_path %>
 </div>
+
+<div >
+  <div>
+    <%= form_for [@product] do |form| %>
+
+      <div>
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
+
+      <div>
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+      </div>
+
+      <div>
+        <%= form.label :quantity %>
+        <%= form.number_field :quantity %>
+      </div>
+
+      <div>
+        <%= form.label :price %>
+        <%= form.text_field :price %>
+      </div>
+
+      <%= form.submit 'Create Product' %>
+    <% end %>
+  </div>
+</div>
+
+
+
