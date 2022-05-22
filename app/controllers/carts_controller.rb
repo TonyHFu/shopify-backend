@@ -3,10 +3,18 @@ class CartsController < ApplicationController
 
 	def add_item
 		product_id = params[:product_id].to_s
-		modify_cart_delta(product_id, +1)
-		flash[:notice] = 'Successfully added item to cart'
 
-		redirect_back fallback_location: '/'
+		product = Product.find(params[:product_id])
+
+		requested_amount = (cart[product_id] || 0)
+
+		if requested_amount >= product.quantity
+			flash[:notice] = 'Not enough in stock to add to cart'
+		else
+			modify_cart_delta(product_id, +1)
+			flash[:notice] = 'Successfully added item to cart'
+		end
+		respond_to { |format| format.html { redirect_back fallback_location: '/' } }
 	end
 
 	def remove_item
